@@ -50,6 +50,7 @@ const Form = () => {
     setFormData({ ...initialFormState });
   };
 
+  // load data from API onto the page
   useEffect(() => {
     setLoaded(false);
     setError(false);
@@ -70,7 +71,7 @@ const Form = () => {
   return (
     <div className="form-wrapper">
 
-      {/* catch and display any errors received from api */}
+      {/* catch and display any errors received from API */}
       {error && <p className="error">Failed to submit form.  Please refresh the page and try again.</p>}
 
       {loaded && (
