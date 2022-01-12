@@ -14,9 +14,10 @@ const Form = () => {
   const [loaded, setLoaded] = useState(false);
 
   const handleChange = (e) => {
+    console.log(e.target.value);
     setFormData({
       ...formData,
-      [e.target.id]: e.target.value,
+      [e.target.name]: e.target.value,
     });
   };
 
@@ -33,6 +34,8 @@ const Form = () => {
     getOccupationsAndStates();
   }, []);
 
+  console.log(formData);
+
   return (
     <div className="form-wrapper">
       {loaded && (
@@ -44,6 +47,7 @@ const Form = () => {
             <input
               type="text"
               id="name"
+              name="name"
               required
               value={formData.name}
               onChange={handleChange}
@@ -57,6 +61,7 @@ const Form = () => {
             <input
               type="text"
               id="email"
+              name="email"
               required
               value={formData.email}
               onChange={handleChange}
@@ -70,6 +75,7 @@ const Form = () => {
             <input
               type="password"
               id="password"
+              name="password"
               required
               value={formData.password}
               onChange={handleChange}
@@ -80,10 +86,15 @@ const Form = () => {
             <label htmlFor="occupation">
               Occupation:<span className="red-accent">*</span>
             </label>
-            <select required onChange={handleChange} id="occupation">
-              <option defaultValue={true}>-- Choose an Occupation -- </option>
+            <select
+              required
+              onChange={handleChange}
+              id="occupation"
+              name="occupation"
+            >
+              <option value="">-- Choose an Occupation -- </option>
               {occupationsAndStates.occupations.map((occupation, index) => (
-                <option key={index} value={formData.occupation}>
+                <option key={index} value={occupation}>
                   {occupation}
                 </option>
               ))}
@@ -94,10 +105,10 @@ const Form = () => {
             <label htmlFor="state">
               State:<span className="red-accent">*</span>
             </label>
-            <select required onChange={handleChange} id="state">
-              <option defaultValue={true}>-- Choose a State -- </option>
+            <select required onChange={handleChange} id="state" name="state">
+              <option value="">-- Choose a State -- </option>
               {occupationsAndStates.states.map((state, index) => (
-                <option key={index} value={formData.state}>
+                <option key={index} value={state.name}>
                   {state.name} ({state.abbreviation})
                 </option>
               ))}
