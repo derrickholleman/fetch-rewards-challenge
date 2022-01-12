@@ -1,47 +1,112 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./Form.css";
 
 const Form = () => {
+  const initialFormState = {
+    name: "",
+    email: "",
+    password: "",
+    occupation: "",
+    state: "",
+  };
+  const [formData, setFormData] = useState({ ...initialFormState });
+  const [occupationsAndStates, setOccupationsAndStates] = useState({});
+  const [loaded, setLoaded] = useState(false);
+
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.id]: e.target.value,
+    });
+  };
+
+  useEffect(() => {
+    setLoaded(false);
+    async function getOccupationsAndStates() {
+      const response = await fetch(
+        "https://frontend-take-home.fetchrewards.com/form"
+      );
+      const resJSON = await response.json();
+      setOccupationsAndStates(resJSON);
+      setLoaded(true);
+    }
+    getOccupationsAndStates();
+  }, []);
+
   return (
     <div className="form-wrapper">
-      <form>
-        <div className="form-field">
-          <label htmlFor="full-name">
-            Full Name:<span className="red-accent">*</span>
-          </label>
-          <input type="text" id="full-name" required />
-        </div>
+      {loaded && (
+        <form>
+          <div className="form-field">
+            <label htmlFor="name">
+              Full Name:<span className="red-accent">*</span>
+            </label>
+            <input
+              type="text"
+              id="name"
+              required
+              value={formData.name}
+              onChange={handleChange}
+            />
+          </div>
 
-        <div className="form-field">
-          <label htmlFor="email">
-            Email:<span className="red-accent">*</span>
-          </label>
-          <input type="text" id="email" required />
-        </div>
+          <div className="form-field">
+            <label htmlFor="email">
+              Email:<span className="red-accent">*</span>
+            </label>
+            <input
+              type="text"
+              id="email"
+              required
+              value={formData.email}
+              onChange={handleChange}
+            />
+          </div>
 
-        <div className="form-field">
-          <label htmlFor="password">
-            Password:<span className="red-accent">*</span>
-          </label>
-          <input type="password" id="password" required />
-        </div>
+          <div className="form-field">
+            <label htmlFor="password">
+              Password:<span className="red-accent">*</span>
+            </label>
+            <input
+              type="password"
+              id="password"
+              required
+              value={formData.password}
+              onChange={handleChange}
+            />
+          </div>
 
-        <div className="form-field">
-          <label htmlFor="occupation">
-            Occupation:<span className="red-accent">*</span>
-          </label>
-          <input type="text" id="occupation" required />
-        </div>
+          <div className="form-field">
+            <label htmlFor="occupation">
+              Occupation:<span className="red-accent">*</span>
+            </label>
+            <select required onChange={handleChange} id="occupation">
+              <option defaultValue={true}>-- Choose an Occupation -- </option>
+              {occupationsAndStates.occupations.map((occupation, index) => (
+                <option key={index} value={formData.occupation}>
+                  {occupation}
+                </option>
+              ))}
+            </select>
+          </div>
 
-        <div className="form-field">
-          <label htmlFor="state">
-            State:<span className="red-accent">*</span>
-          </label>
-          <input type="text" id="state" required />
-        </div>
+          <div className="form-field">
+            <label htmlFor="state">
+              State:<span className="red-accent">*</span>
+            </label>
+            <select required onChange={handleChange} id="state">
+              <option defaultValue={true}>-- Choose a State -- </option>
+              {occupationsAndStates.states.map((state, index) => (
+                <option key={index} value={formData.state}>
+                  {state.name} ({state.abbreviation})
+                </option>
+              ))}
+            </select>
+          </div>
 
-        <button type="submit">Submit</button>
-      </form>
+          <button type="submit">Submit</button>
+        </form>
+      )}
 
       <p>
         <span className="red-accent">*</span>Required Fields
