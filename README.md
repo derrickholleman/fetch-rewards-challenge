@@ -1,9 +1,9 @@
 # Fetch Rewards Challenge
 
 ## Installation
-To install dependencies, verify you are in the project root and run npm install
+To install dependencies, verify you are in the project root and run ``npm install``
 
-To start up the React app, from the project root directory, run 'npm start'
+To start up the React app, from the project root directory, run ``npm start``
 
 ## Project Summary
 A simple user form built with React and CSS.  
