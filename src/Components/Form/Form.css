@@ -44,6 +44,10 @@ input {
   border: 1px solid black;
 }
 
+input:hover {
+  border: 1px solid #e09b11;
+}
+
 select {
   display: block;
   margin-top: .5rem;
