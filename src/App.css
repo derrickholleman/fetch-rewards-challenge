@@ -20,8 +20,18 @@ body {
   color: #dc3545;
 }
 
-.not-found-wrapper {
+.centering-wrapper {
   display: grid;
   place-items: center center;
   margin-top: 5rem;
+}
+
+a {
+  text-decoration: none;
+  color: #300d38;
+  font-family: 'Rubik', sans-serif;
+}
+
+a:hover {
+  text-decoration: underline;
 }

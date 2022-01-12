@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./Form.css";
+import { useHistory } from "react-router-dom";
 
 const Form = () => {
   const initialFormState = {
@@ -9,6 +10,7 @@ const Form = () => {
     occupation: "",
     state: "",
   };
+  const history = useHistory();
   const [formData, setFormData] = useState({ ...initialFormState });
   const [occupationsAndStates, setOccupationsAndStates] = useState({});
   const [loaded, setLoaded] = useState(false);
@@ -21,8 +23,8 @@ const Form = () => {
   };
 
   const handleSubmit = (e) => {
-    e.preventDefault()
-    
+    e.preventDefault();
+
     async function submitUserData() {
       try {
         await fetch("https://frontend-take-home.fetchrewards.com/form", {
@@ -36,11 +38,11 @@ const Form = () => {
       } catch (err) {
         console.error(err);
       }
-    };
-    submitUserData()
-    setFormData({...initialFormState});
-    
-    window.alert("Your response has been received!")
+    }
+    submitUserData();
+    setFormData({ ...initialFormState });
+
+    history.push("/success");
   };
 
   useEffect(() => {
@@ -55,8 +57,6 @@ const Form = () => {
     }
     getOccupationsAndStates();
   }, []);
-
-  console.log(formData);
 
   return (
     <div className="form-wrapper">
