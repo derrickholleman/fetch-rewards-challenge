@@ -13,3 +13,25 @@ button:hover {
 button:active {
   background-color: #ffa900;
 }
+
+.form-wrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.form-field {
+  margin-bottom: 1rem;
+}
+
+label {
+  font-weight: 600;
+  font-size: 1.625rem;
+}
+
+input {
+  padding: .75rem;
+  margin-top: .5rem;
+  display: block;
+  width: 300px;
+  border: 1px solid black;
+}
