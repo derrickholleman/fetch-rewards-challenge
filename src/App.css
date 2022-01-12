@@ -19,3 +19,9 @@ body {
 .red-accent {
   color: #dc3545;
 }
+
+.not-found-wrapper {
+  display: grid;
+  place-items: center center;
+  margin-top: 5rem;
+}

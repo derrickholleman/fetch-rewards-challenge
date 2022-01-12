@@ -14,11 +14,33 @@ const Form = () => {
   const [loaded, setLoaded] = useState(false);
 
   const handleChange = (e) => {
-    console.log(e.target.value);
     setFormData({
       ...formData,
       [e.target.name]: e.target.value,
     });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    
+    async function submitUserData() {
+      try {
+        await fetch("https://frontend-take-home.fetchrewards.com/form", {
+          method: "POST",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(formData),
+        });
+      } catch (err) {
+        console.error(err);
+      }
+    };
+    submitUserData()
+    setFormData({...initialFormState});
+    
+    window.alert("Your response has been received!")
   };
 
   useEffect(() => {
@@ -39,7 +61,7 @@ const Form = () => {
   return (
     <div className="form-wrapper">
       {loaded && (
-        <form>
+        <form onSubmit={handleSubmit}>
           <div className="form-field">
             <label htmlFor="name">
               Full Name:<span className="red-accent">*</span>

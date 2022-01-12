@@ -1,14 +1,22 @@
 import "./App.css";
 import Header from "./Components/Header/Header";
 import Form from "./Components/Form/Form";
-import Success from "./Components/Success/Success";
+import NotFound from "./NotFound";
+import { BrowserRouter as Router, Route } from "react-router-dom";
 
 function App() {
   return (
     <div className="App">
-      <Header />
-      <Success />
-      <Form />
+      <Router>
+        <Header />
+        <Route exact path="/">
+          <Form />
+        </Route>
+
+        <Route path="*">
+          <NotFound />
+        </Route>
+      </Router>
     </div>
   );
 }
