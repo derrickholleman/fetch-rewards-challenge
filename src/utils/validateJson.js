@@ -1,19 +1,22 @@
 function validateOccupationsAndStates(obj) {
   if (typeof obj.occupations !== "object" || typeof obj.states !== "object") {
-    return false;
+    throw new Error("invalid data");
   }
 
-  obj.occupations.forEach((occupation) =>
-    typeof occupation !== "string" ? false : true
+  let validOccupations = obj.occupations.every(
+    (occupation) => typeof occupation === "string"
   );
 
-  obj.states.forEach((state) =>
-    typeof state.name !== "string" || typeof state.abbreviation !== "string"
-      ? false
-      : true
+  let validStates = obj.states.every(
+    (state) =>
+      typeof state.name === "string" && typeof state.abbreviation === "string"
   );
 
-  return true;
+  if (validOccupations && validStates) {
+    return true;
+  } else {
+    throw new Error("invalid data");
+  }
 }
 
 module.exports = { validateOccupationsAndStates };

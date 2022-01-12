@@ -64,7 +64,7 @@ const Form = () => {
         "https://frontend-take-home.fetchrewards.com/form"
       );
       const resJSON = await response.json();
-      // validate that data is in correct format
+      // validate that data source being fetched is valid
       if (validateOccupationsAndStates(resJSON) === true) {
         setOccupationsAndStates(resJSON);
         setLoaded(true);
