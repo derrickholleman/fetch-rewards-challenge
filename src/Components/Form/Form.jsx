@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./Form.css";
 import { useHistory } from "react-router-dom";
+import { validateOccupationsAndStates } from "../../utils/validateJson";
 
 const initialFormState = {
   name: "",
@@ -15,6 +16,7 @@ const Form = () => {
   const [formData, setFormData] = useState({ ...initialFormState });
   const [occupationsAndStates, setOccupationsAndStates] = useState({});
   const [loaded, setLoaded] = useState(false);
+  const [error, setError] = useState(null);
 
   const handleChange = (e) => {
     setFormData({
@@ -36,32 +38,41 @@ const Form = () => {
           },
           body: JSON.stringify(formData),
         });
+
+        // go to success page on form submit
+        history.push("/success");
       } catch (err) {
         console.error(err);
+        setError(err);
       }
     }
     submitUserData();
     setFormData({ ...initialFormState });
-
-    // go to success page on form submit
-    history.push("/success");
   };
 
   useEffect(() => {
     setLoaded(false);
+    setError(false);
     async function getOccupationsAndStates() {
       const response = await fetch(
         "https://frontend-take-home.fetchrewards.com/form"
       );
       const resJSON = await response.json();
-      setOccupationsAndStates(resJSON);
-      setLoaded(true);
+      // validate data is in correct format
+      if (validateOccupationsAndStates(resJSON) === true) {
+        setOccupationsAndStates(resJSON);
+        setLoaded(true);
+      }
     }
     getOccupationsAndStates();
   }, []);
 
   return (
     <div className="form-wrapper">
+
+      {/* catch and display any errors received from api */}
+      {error && <p className="error">Failed to submit form.  Please refresh the page and try again.</p>}
+
       {loaded && (
         <form onSubmit={handleSubmit}>
           <div className="form-field">
