@@ -26,7 +26,7 @@ A simple user form built with React and CSS.
 
 ## API Documentation
 A 'GET' request sent to https://frontend-take-home.fetchrewards.com/form will return data in the form of -
-```{
+``{
     "occupations": [
         "occupation1",
         "occupation2",
@@ -39,16 +39,16 @@ A 'GET' request sent to https://frontend-take-home.fetchrewards.com/form will re
         },
         ...
     ]
-}```
+}``
 
 A 'POST' request sent to the same endpoint must be formatted like -
-```{
+``{
     "name": "???",
     "email": "???",
     "password": "???",
     "occupation": "???",
     "state": "???"
-}```
+}``
 
 ### Home Page
 ![Home Page](src/images/home-page.png)
