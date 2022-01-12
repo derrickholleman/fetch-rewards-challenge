@@ -2,14 +2,15 @@ import React, { useState, useEffect } from "react";
 import "./Form.css";
 import { useHistory } from "react-router-dom";
 
+const initialFormState = {
+  name: "",
+  email: "",
+  password: "",
+  occupation: "",
+  state: "",
+};
+
 const Form = () => {
-  const initialFormState = {
-    name: "",
-    email: "",
-    password: "",
-    occupation: "",
-    state: "",
-  };
   const history = useHistory();
   const [formData, setFormData] = useState({ ...initialFormState });
   const [occupationsAndStates, setOccupationsAndStates] = useState({});
@@ -42,6 +43,7 @@ const Form = () => {
     submitUserData();
     setFormData({ ...initialFormState });
 
+    // go to success page on form submit
     history.push("/success");
   };
 
@@ -115,6 +117,7 @@ const Form = () => {
               name="occupation"
             >
               <option value="">-- Choose an Occupation -- </option>
+              {/* mapping out fetched data from api */}
               {occupationsAndStates.occupations.map((occupation, index) => (
                 <option key={index} value={occupation}>
                   {occupation}
@@ -128,6 +131,7 @@ const Form = () => {
               State:<span className="red-accent">*</span>
             </label>
             <select required onChange={handleChange} id="state" name="state">
+              {/* mapping out fetched data from api */}
               <option value="">-- Choose a State -- </option>
               {occupationsAndStates.states.map((state, index) => (
                 <option key={index} value={state.name}>
