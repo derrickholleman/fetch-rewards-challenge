@@ -48,6 +48,11 @@ input:hover {
   border: 1px solid #e09b11;
 }
 
+.show-hide-password {
+  cursor: pointer;
+  width: max-content;
+}
+
 select {
   display: block;
   margin-top: .5rem;

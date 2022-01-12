@@ -17,12 +17,17 @@ const Form = () => {
   const [occupationsAndStates, setOccupationsAndStates] = useState({});
   const [loaded, setLoaded] = useState(false);
   const [error, setError] = useState(null);
+  const [showPassword, setShowPassword] = useState(false);
 
   const handleChange = (e) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value,
     });
+  };
+
+  const handleShowPassword = (e) => {
+    setShowPassword(!showPassword);
   };
 
   const handleSubmit = (e) => {
@@ -70,9 +75,12 @@ const Form = () => {
 
   return (
     <div className="form-wrapper">
-
       {/* catch and display any errors received from API */}
-      {error && <p className="error">Failed to submit form.  Please refresh the page and try again.</p>}
+      {error && (
+        <p className="error">
+          Failed to submit form. Please refresh the page and try again.
+        </p>
+      )}
 
       {loaded && (
         <form onSubmit={handleSubmit}>
@@ -108,14 +116,36 @@ const Form = () => {
             <label htmlFor="password">
               Password:<span className="red-accent">*</span>
             </label>
-            <input
-              type="password"
-              id="password"
-              name="password"
-              required
-              value={formData.password}
-              onChange={handleChange}
-            />
+            {/* show/hide password field toggle */}
+            {showPassword ? (
+              <div>
+                <input
+                  type="text"
+                  id="password"
+                  name="password"
+                  required
+                  value={formData.password}
+                  onChange={handleChange}
+                />
+                <p onClick={handleShowPassword} className="show-hide-password">
+                  Hide Password
+                </p>
+              </div>
+            ) : (
+              <div>
+                <input
+                  type="password"
+                  id="password"
+                  name="password"
+                  required
+                  value={formData.password}
+                  onChange={handleChange}
+                />
+                <p onClick={handleShowPassword} className="show-hide-password">
+                  Show Password
+                </p>
+              </div>
+            )}
           </div>
 
           <div className="form-field">
