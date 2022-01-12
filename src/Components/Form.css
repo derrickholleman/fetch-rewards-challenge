@@ -1,10 +1,13 @@
 button {
   background-color: #300d38;
-  border-radius: 9999px;
+  border-radius: 100px;
   border: none;
-  padding: 0.5rem 1.25rem;
+  padding: 0.75rem 1.5rem;
   color: white;
-  font-weight: 500;
+  font-weight: bolder;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color .3s;
 }
 
 button:hover {
@@ -15,8 +18,9 @@ button:active {
 }
 
 .form-wrapper {
-  display: flex;
-  justify-content: center;
+  width: 80%;
+  margin: 5rem auto;
+  max-width: 800px;
 }
 
 .form-field {
@@ -32,6 +36,12 @@ input {
   padding: .75rem;
   margin-top: .5rem;
   display: block;
-  width: 300px;
+  width: 100%;
   border: 1px solid black;
+}
+
+@media screen and (max-width: 381px) {
+  .form-wrapper {
+    margin: 2rem auto;
+  }
 }

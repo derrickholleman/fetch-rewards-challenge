@@ -3,12 +3,11 @@
 .header {
     background-color: #c7c1e0;
     font-family: 'Rubik', sans-serif;
-    margin-bottom: 5rem;
 }
 
 h1 {
     font-weight: 500;
-    font-size: 3.5rem;
+    font-size: clamp(2.75rem, 6vw, 3.5rem);
     text-align: center;
     padding: 2rem 0;
 }

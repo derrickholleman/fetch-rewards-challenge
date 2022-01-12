@@ -39,6 +39,8 @@ const Form = () => {
           </label>
           <input type="text" id="state" required />
         </div>
+
+        <button type="submit">Submit</button>
       </form>
     </div>
   );
