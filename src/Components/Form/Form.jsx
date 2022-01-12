@@ -42,6 +42,10 @@ const Form = () => {
 
         <button type="submit">Submit</button>
       </form>
+
+      <p>
+        <span className="red-accent">*</span>Required Fields
+      </p>
     </div>
   );
 };

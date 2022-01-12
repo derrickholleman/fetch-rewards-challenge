@@ -23,6 +23,10 @@ button:active {
   max-width: 800px;
 }
 
+form {
+  margin-bottom: 2rem;
+}
+
 .form-field {
   margin-bottom: 1rem;
 }
@@ -33,7 +37,7 @@ label {
 }
 
 input {
-  padding: .75rem;
+  padding: 1rem;
   margin-top: .5rem;
   display: block;
   width: 100%;
