@@ -81,7 +81,7 @@ const Form = () => {
               Email:<span className="red-accent">*</span>
             </label>
             <input
-              type="text"
+              type="email"
               id="email"
               name="email"
               required
