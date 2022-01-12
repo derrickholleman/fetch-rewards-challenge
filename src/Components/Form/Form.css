@@ -70,3 +70,9 @@ select {
     margin: 2rem auto;
   }
 }
+
+@media screen and (max-width: 481px) {
+  button {
+    width: 100%;
+  }
+}
