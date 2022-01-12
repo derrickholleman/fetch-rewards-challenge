@@ -26,6 +26,11 @@ body {
   margin-top: 5rem;
 }
 
+h2 {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
 a {
   text-decoration: none;
   color: #300d38;
