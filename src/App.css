@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700;800;900&display=swap");
+
 * {
   margin: 0;
   padding: 0;
@@ -14,6 +16,19 @@ body {
 
 .App {
   color: #230871;
+}
+
+.header {
+  background-color: #c7c1e0;
+  font-family: "Rubik", sans-serif;
+}
+
+h1 {
+  font-weight: 500;
+  font-size: clamp(2.75rem, 6vw, 3.5rem);
+  text-align: center;
+  padding: 2rem 0;
+  margin: 0 0.5rem;
 }
 
 .red-accent {
@@ -34,7 +49,7 @@ h2 {
 a {
   text-decoration: none;
   color: #300d38;
-  font-family: 'Rubik', sans-serif;
+  font-family: "Rubik", sans-serif;
 }
 
 a:hover {
