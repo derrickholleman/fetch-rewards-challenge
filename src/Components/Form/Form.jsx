@@ -60,14 +60,19 @@ const Form = () => {
     setLoaded(false);
     setError(false);
     async function getOccupationsAndStates() {
-      const response = await fetch(
-        "https://frontend-take-home.fetchrewards.com/form"
-      );
-      const resJSON = await response.json();
-      // validate that data source being fetched is valid
-      if (validateOccupationsAndStates(resJSON) === true) {
-        setOccupationsAndStates(resJSON);
-        setLoaded(true);
+      try {
+        const response = await fetch(
+          "https://frontend-take-home.fetchrewards.com/form"
+        );
+        const resJSON = await response.json();
+        // validate that data source being fetched is valid
+        if (validateOccupationsAndStates(resJSON) === true) {
+          setOccupationsAndStates(resJSON);
+          setLoaded(true);
+        }
+      } catch (err) {
+        console.error(err);
+        setError(true);
       }
     }
     getOccupationsAndStates();
@@ -75,10 +80,10 @@ const Form = () => {
 
   return (
     <div className="form-wrapper">
-      {/* catch and display any errors received from API */}
+      {/* display error message if API fetch fails */}
       {error && (
         <p className="error">
-          Failed to submit form. Please refresh the page and try again.
+          Something went wrong! Please refresh the page and try again.
         </p>
       )}
 
