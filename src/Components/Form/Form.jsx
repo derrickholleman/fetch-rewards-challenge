@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./Form.css";
 import { useHistory } from "react-router-dom";
 import { validateOccupationsAndStates } from "../../utils/validateJson";
+import { getOccupationsAndStates, submitUserData } from "../../utils/api";
 
 const initialFormState = {
   name: "",
@@ -30,52 +31,38 @@ const Form = () => {
     setShowPassword(!showPassword);
   };
 
-  const handleSubmit = (e) => {
+  async function handleSubmit(e) {
     e.preventDefault();
-
-    async function submitUserData() {
-      try {
-        await fetch("https://frontend-take-home.fetchrewards.com/form", {
-          method: "POST",
-          headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(formData),
-        });
-
-        // go to success page on form submit
+    try {
+      const res = await submitUserData(formData);
+      if (res.ok) {
+        setFormData({ ...initialFormState });
         history.push("/success");
-      } catch (err) {
-        console.error(err);
-        setError(err);
+      } else {
+        throw new Error(res.status);
       }
+    } catch (err) {
+      console.error(err);
+      setError(err);
     }
-    submitUserData();
-    setFormData({ ...initialFormState });
-  };
+  }
 
   // load data from API onto the page
   useEffect(() => {
     setLoaded(false);
     setError(false);
-    async function getOccupationsAndStates() {
-      try {
-        const response = await fetch(
-          "https://frontend-take-home.fetchrewards.com/form"
-        );
-        const resJSON = await response.json();
-        // validate that data source being fetched is valid
-        if (validateOccupationsAndStates(resJSON) === true) {
-          setOccupationsAndStates(resJSON);
+    
+    getOccupationsAndStates()
+      .then((res) => {
+        if (validateOccupationsAndStates(res) === true) {
+          setOccupationsAndStates(res);
           setLoaded(true);
         }
-      } catch (err) {
+      })
+      .catch((err) => {
         console.error(err);
         setError(true);
-      }
-    }
-    getOccupationsAndStates();
+      });
   }, []);
 
   return (
@@ -122,20 +109,19 @@ const Form = () => {
               Password:<span className="red-accent">*</span>
             </label>
             {/* show/hide password field toggle */}
-              <div>
-                <input
-                  type={showPassword ? "text" : "password"}
-                  id="password"
-                  name="password"
-                  required
-                  value={formData.password}
-                  onChange={handleChange}
-                />
-                <p onClick={handleShowPassword} className="show-hide-password">
-                  {showPassword ? "Hide Password" : "Show Password"}
-                </p>
-              </div>
-           
+            <div>
+              <input
+                type={showPassword ? "text" : "password"}
+                id="password"
+                name="password"
+                required
+                value={formData.password}
+                onChange={handleChange}
+              />
+              <p onClick={handleShowPassword} className="show-hide-password">
+                {showPassword ? "Hide Password" : "Show Password"}
+              </p>
+            </div>
           </div>
 
           <div className="form-field">
