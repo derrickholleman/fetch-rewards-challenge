@@ -122,10 +122,9 @@ const Form = () => {
               Password:<span className="red-accent">*</span>
             </label>
             {/* show/hide password field toggle */}
-            {showPassword ? (
               <div>
                 <input
-                  type="text"
+                  type={showPassword ? "text" : "password"}
                   id="password"
                   name="password"
                   required
@@ -133,24 +132,10 @@ const Form = () => {
                   onChange={handleChange}
                 />
                 <p onClick={handleShowPassword} className="show-hide-password">
-                  Hide Password
+                  {showPassword ? "Hide Password" : "Show Password"}
                 </p>
               </div>
-            ) : (
-              <div>
-                <input
-                  type="password"
-                  id="password"
-                  name="password"
-                  required
-                  value={formData.password}
-                  onChange={handleChange}
-                />
-                <p onClick={handleShowPassword} className="show-hide-password">
-                  Show Password
-                </p>
-              </div>
-            )}
+           
           </div>
 
           <div className="form-field">
